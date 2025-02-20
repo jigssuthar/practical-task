@@ -13,6 +13,11 @@ class frontendController extends Controller
         $product = Product::with('user','category')->get();
         return view('dashboard',compact('product','categories'));
     }
+    public function product(){
+        $categories = Category::all();
+        $product = Product::with('user','category')->get();
+        return view('products.index',compact('product','categories'));
+    }
     public function search(Request $request)
     {
         $query = Product::query();
@@ -65,7 +70,7 @@ class frontendController extends Controller
         $product->save();
        
 
-        return redirect()->route('dashboard');
+        return redirect()->route('product.index');
     }
 
     public function edit(Product $product)
@@ -88,7 +93,7 @@ class frontendController extends Controller
             $product->image = $imageName; // Save the image URL to the product
         }
         $product->save();
-        return redirect()->route('dashboard')->with('success', 'Product updated successfully.');
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
     public function destroy(Product $product)
     {
@@ -97,6 +102,6 @@ class frontendController extends Controller
             unlink(public_path('products/'.$product->image));
         }
         $product->delete();
-        return redirect()->route('dashboard')->with('success', 'Product deleted successfully');
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
 }

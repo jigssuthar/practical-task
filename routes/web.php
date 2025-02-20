@@ -29,6 +29,7 @@ Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admi
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [frontendController::class, 'index'])->name('dashboard');
+    Route::get('product', [frontendController::class, 'product'])->name('product.index');
     Route::get('product/create', [frontendController::class, 'create'])->name('product.create');
     Route::any('/product/store', [frontendController::class, 'store'])->name('product.store');
     Route::get('product/{product}/edit', [frontendController::class, 'edit'])->name('product.edit');
