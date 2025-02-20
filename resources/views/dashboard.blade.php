@@ -30,7 +30,6 @@
                                     <p class="text-gray-600 mt-2">{{ $products->description }}</p>
                                     <p class="mt-2 text-lg font-bold text-gray-900">₹{{ number_format($products->price, 2) }}</p>
                                     <p class="mt-2 text-lg  text-gray-900">Store - {{ $products->user->store_name}}</p>
-                                    <a href="" class="block mt-4 bg-blue-500 text-white text-center rounded-md py-2">Order Now</a>
                                 </div>
                             </div>
                         @endforeach
