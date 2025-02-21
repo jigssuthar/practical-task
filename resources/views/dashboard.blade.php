@@ -30,6 +30,7 @@
                                     <p class="text-gray-600 mt-2">{{ $products->description }}</p>
                                     <p class="mt-2 text-lg font-bold text-gray-900">₹{{ number_format($products->price, 2) }}</p>
                                     <p class="mt-2 text-lg  text-gray-900">Store - {{ $products->user->store_name}}</p>
+                                    <p class="text-gray-600 mt-2">Free Delivary</p>
                                 </div>
                             </div>
                         @endforeach

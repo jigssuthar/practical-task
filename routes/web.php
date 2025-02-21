@@ -65,4 +65,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/category', [BackendController::class, 'category'])->name('admin.category');
     Route::post('/categories', [BackendController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [BackendController::class, 'update'])->name('categories.update');
+
+    Route::get('admin/profile/update', [BackendController::class, 'profile'])->name('admin.profile.index');
+    Route::patch('admin/profile/update', [BackendController::class, 'profileUpdate'])->name('admin.profile.update');
+    Route::put('admin/password', [BackendController::class, 'passwordUpdate'])->name('admin.password.update');
+    Route::delete('admin/profile/update', [BackendController::class, 'destroy'])->name('admin.profile.destroy');
+
+
+
 });
