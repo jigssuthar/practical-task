@@ -36,7 +36,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="card-body">
-                        @if (auth()->user()->hasRole('customer'))
+                        @if (auth()->user()->hasRole('customer') || auth()->user()->hasRole('admin'))
                         <!-- Search Form -->
                         <div class="row mb-4">
                             <div class="col-md-4">
