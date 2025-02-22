@@ -12,16 +12,44 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 class BackendController extends Controller
 {
+    public function userlist(){
+        $users = User::all();
+        return view('admin.users.index',compact('users'));
+    }
+    public function userDestroy(User $User): RedirectResponse
+    {
+        $User->delete();
+        return Redirect::route('admin.users')->with('status', 'user-updated');
+    }
+    
+    public function userEdit(User $User)
+    {
+        return view('admin.users.edit', compact('User'));
+    }
+    public function userUpdate(Request $request, User $User)
+    {
+        $User->name = $request->name;
+        $User->email = $request->email;
+        $User->store_name = $request->store_name;
+        $User->store_description = $request->store_description;
+        if ($request->hasFile('profile_pic')) {
+            $image = $request->file('profile_pic');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('profile'), $imageName);
+            $User->profile_pic = $imageName; // Save the image URL to the product
+        }
+        $User->save();
+        return redirect()->route('admin.users')->with('success', 'User updated successfully.');
+    }
     public function category(){
         $categories = Category::all();
         return view('admin.category.categoryview',compact('categories'));
     }
-   
-
     public function store(Request $request)
     {
         $request->validate([
@@ -99,16 +127,11 @@ class BackendController extends Controller
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
-
         $user = $request->user();
-
         Auth::logout();
-
         $user->delete();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return Redirect::route('admin.profile.index')->with('status', 'profile-updated');
     }
  

@@ -53,6 +53,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    Route::get('admin/users', [App\Http\Controllers\Admin\BackendController::class, 'userlist'])->name('admin.users');
+    Route::get('/admin/users/{user}', [App\Http\Controllers\Admin\BackendController::class, 'userEdit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [App\Http\Controllers\Admin\BackendController::class, 'userUpdate'])->name('admin.user.update');
+    Route::delete('/admin/users/{user}', [App\Http\Controllers\Admin\BackendController::class, 'userDestroy'])->name('admin.users.destroy');
+
+
 
     // Cart-related routes for admin
     Route::get('admin/products', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.product');

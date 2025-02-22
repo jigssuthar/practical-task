@@ -80,8 +80,10 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-user"></i>
-          <i class="right fas fa-angle-down"></i>
+          
+          {{-- <img src="{{ asset('profile/'. Auth::user()->profile_pic) }}" width="30px" class="img-circle elevation-2" alt="User Image"> --}}
+          
+          <i class="far fa-user"></i> {{Auth()->user()->name}} <i class="right fas fa-angle-down">  </i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
@@ -118,7 +120,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('profile/'. Auth::user()->profile_pic) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth()->user()->name}}</a>
@@ -151,7 +153,14 @@
                     </p>
                 </a>
             </li>
-            
+            <li class="nav-item">
+              <a href="{{ route('admin.users') }}" class="nav-link {{ Request::routeIs('admin.users') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Users
+                </p>
+              </a>
+            </li>
           <li class="nav-item">
             <a href="{{ route('admin.product') }}" class="nav-link {{ Request::routeIs('admin.product') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
