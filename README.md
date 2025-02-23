@@ -32,6 +32,13 @@ This e-commerce platform is designed to manage and sell products with different 
 - **Backend**: Laravel
 - **Database**: MySQL
 
+## Setup
+
+- **composer install**
+- **php artisan key:generate**
+- **php artisan migrate**
+- **php artisan db:seed**
+
 ### Routes
 
 #### For Users and Vendors:
